@@ -3,6 +3,7 @@
 ## Java
 - Based on `centos:centos7`
 - Using Oracle Java 8 Server JRE
+- By using this build, you agree with [Oracle's Binary Code License Agree for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) implicitly
 
 ## Tomcat
 - Based on `cooniur/java:latest`, which is the above Java docker build
