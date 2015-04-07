@@ -1,0 +1,3 @@
+[submodule "grafana-graphite"]
+	path = grafana-graphite
+	url = git@github.com:cooniur/docker-grafana-graphite.git
