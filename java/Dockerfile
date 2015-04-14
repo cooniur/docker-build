@@ -3,8 +3,8 @@ MAINTAINER cooniur
 
 RUN yum -y install wget tar && yum clean all
 
-ENV JAVA_VERSION 8u40
-ENV JAVA_LONG_VERSION 8u40-b26
+ENV JAVA_VERSION 8u45
+ENV JAVA_LONG_VERSION 8u45-b14
 
 ENV JAVA_HOME /apps/java
 ENV PATH $JAVA_HOME/bin:$PATH
