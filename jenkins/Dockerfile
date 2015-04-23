@@ -17,14 +17,14 @@ ENV PATH $GROOVY_HOME/bin:$MAVEN_HOME/bin:$PATH
 # Install Groovy
 RUN yum -y install unzip git && yum clean all \
 	&& wget --quiet --output-document=/tmp/groovy.zip \
-		"http://dl.bintray.com/groovy/maven/groovy-binary-2.4.3.zip" \
+		"http://dl.bintray.com/groovy/maven/groovy-binary-${GROOVY_VERSION}.zip" \
 	&& unzip /tmp/groovy.zip -d /apps/ \
 	&& rm /tmp/groovy.zip*
 
 # Install Maven
 RUN mkdir -p $MAVEN_HOME \
 	&& wget --quiet --output-document=/tmp/maven.tar.gz \
-		"http://www.us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-3.3.1-bin.tar.gz" \
+		"http://www.us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz" \
 	&& tar -xf "/tmp/maven.tar.gz" --directory="$MAVEN_HOME" --strip-components 1 \
 	&& rm /tmp/maven.tar.gz*
 
@@ -46,6 +46,24 @@ RUN yum -y install ansible && yum clean all \
 	&& pip install boto \
 	&& rm -f /tmp/get-pip/py \
 	&& rm -rf /tmp/pip_build_root
+
+# Install node, npm, bower & gulp
+ENV NODE_VERSION=0.12.2
+ENV NODE_HOME=/apps/node
+ENV NPM_VERSION=2.7.5
+
+RUN yum -y install bzip2 && yum clean all \
+	&& wget --output-document=/tmp/node.tar.gz \
+		"http://nodejs.org/dist/v$NODE_VERSION/node-v${NODE_VERSION}-linux-x64.tar.gz" \
+	&& mkdir -p $NODE_HOME \
+	&& tar xzf /tmp/node.tar.gz --strip-components 1 -C $NODE_HOME \
+	&& rm -f /tmp/node.tar.gz
+
+ENV PATH $NODE_HOME/bin:$PATH
+
+RUN npm install npm@$NPM_VERSION -g \
+	&& npm install bower gulp -g \
+	&& npm cache clean
 
 # Jenkins' home is in /jenkins
 # AWS credentials goes to /root/.aws
