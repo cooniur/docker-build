@@ -3,8 +3,8 @@ MAINTAINER cooniur
 
 # Version
 ENV GROOVY_VERSION 2.4.3
-ENV MAVEN_VERSION 3.3.1
-ENV JENKINS_VERSION 1.610
+ENV MAVEN_VERSION 3.3.3
+ENV JENKINS_VERSION 1.613
 
 ENV MAVEN_HOME /apps/apache-maven
 ENV GROOVY_HOME /apps/groovy-2.4.3
@@ -71,4 +71,6 @@ VOLUME ["/jenkins", "/root/.aws"]
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "/apps/jenkins/bin/jenkins.war"]
+ENV JENKINS_TIMEZONE=UTC
+
+CMD java -jar -Dorg.apache.commons.jelly.tags.fmt.timeZone=$JENKINS_TIMEZONE /apps/jenkins/bin/jenkins.war
