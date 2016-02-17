@@ -73,4 +73,7 @@ EXPOSE 8080
 
 ENV JENKINS_TIMEZONE=UTC
 
-CMD java -jar -Dorg.apache.commons.jelly.tags.fmt.timeZone=$JENKINS_TIMEZONE /apps/jenkins/bin/jenkins.war
+CMD java -jar \
+    -Dorg.apache.commons.jelly.tags.fmt.timeZone=$JENKINS_TIMEZONE \
+    -Dhudson.diyChunking=false \
+    /apps/jenkins/bin/jenkins.war
